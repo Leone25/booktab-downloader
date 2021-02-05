@@ -54,7 +54,7 @@ class ResponseStream(object):
             self._bytes.seek(position, whence) 
 
 
-cookie = "_9b3ca46a51a304edff4680dbe6e81768" # input("Input shibsession cookie: ")
+cookie = input("Input shibsession cookie: ")
 
 isbn = input("Input the ISBN of the book you'd like to download: ")
 
