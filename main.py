@@ -5,9 +5,8 @@ from xml.dom.minidom import parseString
 from io import BytesIO, SEEK_SET, SEEK_END 
 import PyPDF2
 
-# Create a class which convert PDF in 
-# BytesIO form 
-# TBH i stole this one from somewhere and i have no ide how it works
+# Create a class which convert PDF in BytesIO form 
+# TBH I stole this one from somewhere and I have no idea how it works
 class ResponseStream(object): 
       
     def __init__(self, request_iterator): 
@@ -54,22 +53,22 @@ class ResponseStream(object):
             self._bytes.seek(position, whence) 
 
 
-cookie = input("Input shibsession cookie: ")
+cookie = input("Paste the shibsession cookie: ")
 
-isbn = input("Input the ISBN of the book you'd like to download: ")
+isbn = input("Input the ISBN of the book you want to download: ")
 
-print("Gethering information about volume", isbn)
+print("Gethering information about the volume...")
 
 spine = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/spine.xml', allow_redirects=False, headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
 
 if spine.status_code == 302:
-    print("Invalid cookie, please try again.")
+    print("Invalid shibsession cookie, please try again.")
     sys.exit() 
 elif spine.status_code != 200:
-    print("Invalid isbn, please try again.")
+    print("Invalid ISBN, please try again.")
     sys.exit()
 
-print("Extracting chapters")
+print("Extracting chapters...")
 
 spine = parseString(spine.text)
 
@@ -77,7 +76,7 @@ parts = spine.getElementsByTagName("unit")
 
 merger = PyPDF2.PdfFileMerger()
 
-print("Downloading all parts")
+print("Downloading all parts...")
 
 for part in parts:
 
@@ -102,4 +101,4 @@ for part in parts:
     merger.append(PyPDF2.PdfFileReader(ResponseStream(pdf.iter_content(64))))
 
 
-merger.write(input("Input a title: ") + ".pdf")
+merger.write(input("Input a title for the file: ") + ".pdf")
