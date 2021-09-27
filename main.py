@@ -69,9 +69,6 @@ if spine.status_code == 302:
 elif spine.status_code != 200:
 
     spine = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/volume.xml', allow_redirects=False, headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
-
-    print(spine.status_code)
-
     if spine.status_code == 302:
         print("Invalid shibsession cookie, please try again.")
         sys.exit() 
