@@ -88,7 +88,12 @@ print("Downloading all parts...")
 
 for part in parts:
 
+    if part.getAttribute("features") == 'flash':
+        continue
+
     partInfo = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/'+part.getAttribute("btbid")+'/config.xml', headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
+
+    #print('http://web.booktab.it/boooks_web/'+isbn+'/'+part.getAttribute("btbid")+'/config.xml')
 
     if partInfo.status_code != 200:
         continue
