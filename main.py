@@ -53,13 +53,13 @@ class ResponseStream(object):
             self._bytes.seek(position, whence) 
 
 
-cookie = input("Paste the shibsession cookie: ")
+cookie = input("Paste the cookies: ")
 
 isbn = input("Input the ISBN of the book you want to download: ")
 
 print("Gethering information about the volume...")
 
-spine = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/spine.xml', allow_redirects=False, headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
+spine = requests.get('https://web-booktab.zanichelli.it/api/v1/resources_web/'+isbn+'/spine.xml', allow_redirects=False, headers={'Cookie':cookie})
 
 pdfsToMerge = []
 
@@ -68,7 +68,7 @@ if spine.status_code == 302:
     sys.exit() 
 elif spine.status_code != 200:
 
-    spine = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/volume.xml', allow_redirects=False, headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
+    spine = requests.get('https://web-booktab.zanichelli.it/api/v1/resources_web/'+isbn+'/volume.xml', allow_redirects=False, headers={'Cookie':cookie})
     if spine.status_code == 302:
         print("Invalid shibsession cookie, please try again.")
         sys.exit() 
@@ -91,7 +91,7 @@ for part in parts:
     if part.getAttribute("features") == 'flash':
         continue
 
-    partInfo = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/'+part.getAttribute("btbid")+'/config.xml', headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
+    partInfo = requests.get('https://web-booktab.zanichelli.it/api/v1/resources_web/'+isbn+'/'+part.getAttribute("btbid")+'/config.xml', headers={'Cookie':cookie})
 
     #print('http://web.booktab.it/boooks_web/'+isbn+'/'+part.getAttribute("btbid")+'/config.xml')
 
@@ -109,7 +109,7 @@ for part in parts:
             pdfUrl = entry.firstChild.nodeValue+".pdf"
             break
 
-    pdf = requests.get('http://web.booktab.it/boooks_web/'+isbn+'/'+part.getAttribute("btbid")+'/'+pdfUrl, headers={'Cookie':'_shibsession_626f6f6b746162776562687474703a2f2f7765622e626f6f6b7461622e69742f73686962626f6c657468='+cookie})
+    pdf = requests.get('https://web-booktab.zanichelli.it/api/v1/resources_web/'+isbn+'/'+part.getAttribute("btbid")+'/'+pdfUrl, headers={'Cookie':cookie})
     
     merger.append(PyPDF2.PdfFileReader(ResponseStream(pdf.iter_content(64))))
 
