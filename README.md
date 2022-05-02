@@ -16,7 +16,7 @@ A python script to download you Zanichelli books from web Booktab as PDFs, now u
 3. Open [Booktab Web](http://web-booktab.zanichelli.it/) and login
 4. Open the developers tool, go in the "network" tab and enable the `Fetch/XHR` filter and disable cache
 5. Click on the cover of the volume you'd like to download in the booktab page
-6. Back in the network tools look for the `volume.xml` file that should appear in the network tab
+6. Back in the network tools look for the `volume.xml` or `spine.xml` file that should appear in the network tab
 7. Select it and scroll down to the boottom of the headers where it says `Cookie`
 8. Copy all the cookies (do not include the `Cookie:` part) and paste them in the terminal and press enter
 9. Take the ISBN of the book you'd like to download, paste it into the terminal and press enter
