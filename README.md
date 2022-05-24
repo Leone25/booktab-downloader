@@ -6,6 +6,7 @@ A python script to download you Zanichelli books from web Booktab as PDFs, now u
 
 ## How to use
 NOTE: It has been brought to my attention that mac users had problems with the long cookies booktab uses, so i highly discurrage you using this script on mac
+
 NOTE #2: Often chromium browsers (Eg. chrome, edge ...) don't always show the cookie for whatever reason. Please use firefox, and remember to enable "show raw headers" otherwise the cookie will be shortened and you will receive an error.
 
 1. Download this repo, unzip the download, open a terminal, navigate to the extracted files and type:
