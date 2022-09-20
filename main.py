@@ -53,7 +53,7 @@ class ResponseStream(object):
             self._bytes.seek(position, whence) 
 
 
-cookie = input("Paste the cookies: ")
+cookie = input("Paste the cookies: ").encode('latin-1', 'replace')
 
 isbn = input("Input the ISBN of the book you want to download: ")
 
