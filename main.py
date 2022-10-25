@@ -1,6 +1,5 @@
 import sys  
 import requests
-import base64
 from xml.dom.minidom import parseString
 from io import BytesIO, SEEK_SET, SEEK_END 
 import PyPDF2
@@ -53,7 +52,12 @@ class ResponseStream(object):
             self._bytes.seek(position, whence) 
 
 
-cookie = input("Paste the cookies: ").encode('latin-1', 'replace')
+if sys.platform == 'darwin': #macos """fixup"""
+    input("Paste the cookie in the cookies.txt and then press enter")
+    cookie = open("cookies.txt", "rb").read()
+else:
+    cookie = input("Paste the cookies: ").encode('latin-1', 'replace')
+
 
 isbn = input("Input the ISBN of the book you want to download: ")
 
