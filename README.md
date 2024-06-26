@@ -2,7 +2,7 @@
 
 A python script to download you Zanichelli books from web Booktab as PDFs, now updated!
 
-**NOTE:** this doesnt work for the kitaboo reader (new web reader), to download those please look at https://github.com/Leone25/kitaboo-downloader
+# **THIS ONLY WORKS WITH BOOKS THAT DO NOT HAVE THE RED `LaZ Ebook` LABEL NEXT TO THE "READ BOOK ONLINE" BUTTON, THE BOOKS THAT DO HAVE IT ARE KITABOO BOOKS, FOR THOSE PLEASE CHECK https://github.com/Leone25/kitaboo-downloader**
 
 ## How to use
 
